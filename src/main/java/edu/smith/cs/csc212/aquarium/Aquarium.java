@@ -41,8 +41,8 @@ public class Aquarium extends GFX {
 		super(WIDTH, HEIGHT);
 	}
 
-	Fish nemo = new Fish(Color.red, 250, 250, true, true);
-	Fish dory = new Fish(Color.cyan, 100, 100, false, true);
+	Fish nemo = new Fish(Color.red, 250, 250, .1, true, false);
+	Fish dory = new Fish(Color.cyan, 100, 100, .1, false, true);
 
 	@Override
 	public void draw(Graphics2D g) {
@@ -52,7 +52,11 @@ public class Aquarium extends GFX {
 		
 		//Draw nemo and dory
 		nemo.draw(g);
+		//System.out.println(nemo.x);
+		//System.out.println(nemo.y);
 		dory.draw(g);
+		//System.out.println(dory.x);
+		//System.out.println(dory.y);
 
 		// Draw our snail!
 		algorithm.draw(g);
