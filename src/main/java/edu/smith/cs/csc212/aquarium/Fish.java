@@ -3,7 +3,6 @@ package edu.smith.cs.csc212.aquarium;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Random;
-import java.awt.Point;
 
 public class Fish {
 	Color color;
@@ -25,11 +24,13 @@ public class Fish {
 		this.y = startY;
 		this.isLittle = isLittle;
 		this.facingLeft = facingLeft;
-		this.targetX = r.nextInt(501);
-		this.targetY = r.nextInt(501);
+		this.targetX = r.nextInt(401);
+		this.targetY = r.nextInt(401);
+		this.speed = speed;
 	}
 	
 	public void draw(Graphics2D g) {
+		//make sure the fish faces the correct direction
 		if (this.isLittle) {
 			if (this.facingLeft) {
 				DrawFish.smallFacingLeft(g, this.color, this.x, this.y);
@@ -48,22 +49,26 @@ public class Fish {
 	}
 	
 	public void swim() {
-		Point fishPoint = new Point();
-		
-		
+		//calculate the sides of a right triangle 
 		double differenceX = this.targetX - this.x;
 		double differenceY = this.targetY - this.y;
-		System.out.println(differenceX);
-		System.out.println(differenceY);
-		double targetDistance = Math.sqrt(Math.pow(differenceX, 2)
-				- Math.pow(differenceY, 2));
-		System.out.println(targetDistance);
-		
+		//figure out what direction to point the fish next frame
+		if (differenceX > 0) {
+			this.facingLeft = false;
+		} else {
+			this.facingLeft = true;
+		}
+		//calculate the third side, yes I know I could do this more easily
+		double targetDistance = Math.sqrt(Math.pow(differenceX, 2) + Math.pow(differenceY, 2));
+		//move the fish
 		this.x += (differenceX / targetDistance) * this.speed;
 		this.y += (differenceY / targetDistance) * this.speed;
-		if (differenceX < 2 && differenceY < 2) {
-			this.targetX = r.nextInt(501);
-			this.targetY = r.nextInt(501);
+		//check to see if the fish is near its target
+		if (Math.abs(differenceX) < 2 && Math.abs(differenceY) < 2) {
+			//if so, get a new target
+			this.targetX = r.nextInt(401);
+			this.targetY = r.nextInt(401);
+		
 		}
 	}
 }
