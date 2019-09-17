@@ -55,6 +55,7 @@ public class Aquarium extends GFX {
 		nemo.draw(g);
 		dory.draw(g);
 		
+		this.bubbleSystem.drawChest(g);
 		this.bubbleSystem.bubbleSpawn();
 		this.bubbleSystem.bubbleDraw(g);
 
