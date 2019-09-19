@@ -9,8 +9,10 @@ public class Fish {
 	public double x;
 	public double y;
 	double speed;
+	
 	boolean isLittle;
 	boolean facingLeft;
+	boolean isAlive;
 	
 	double targetX;
 	double targetY;
@@ -24,6 +26,7 @@ public class Fish {
 		this.y = startY;
 		this.isLittle = isLittle;
 		this.facingLeft = facingLeft;
+		this.isAlive = true;
 		this.targetX = r.nextInt(401);
 		this.targetY = r.nextInt(401);
 		this.speed = speed;
