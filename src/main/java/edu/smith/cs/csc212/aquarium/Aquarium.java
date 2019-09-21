@@ -2,6 +2,8 @@ package edu.smith.cs.csc212.aquarium;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.List;
 
 import me.jjfoley.gfx.GFX;
 
@@ -16,6 +18,7 @@ import me.jjfoley.gfx.GFX;
  * 
  * @author jfoley
  *
+ * Edited by Per Van Dyke, I didn't end up with a partner in the lab
  */
 public class Aquarium extends GFX {
 	/**
@@ -31,6 +34,9 @@ public class Aquarium extends GFX {
 	 * Put a snail on the top of the tank.
 	 */
 	Snail algorithm = new Snail(177, Snail.HEIGHT + 1, "top");
+	Shark jaws;
+	
+	List<Fish> fishList = new ArrayList<>();
 	
 	/**
 	 * This is a constructor, code that runs when we make a new Aquarium.
@@ -39,10 +45,12 @@ public class Aquarium extends GFX {
 		// Here we ask GFX to make our window of size WIDTH and HEIGHT.
 		// Don't change this here, edit the variables instead.
 		super(WIDTH, HEIGHT);
+		fishList.add(new Fish(Color.red, 250, 250, 1, true, false));
+		fishList.add(new Fish(Color.cyan, 100, 100, 1, false, true));
+		jaws = new Shark(Color.gray, 0, 250, 1.2, false, true, fishList);
+		
 	}
-
-	Fish nemo = new Fish(Color.red, 250, 250, 3, true, false);
-	Fish dory = new Fish(Color.cyan, 100, 100, 3, false, true);
+	
 	BubbleSystem bubbleSystem = new BubbleSystem();
 
 	@Override
@@ -51,9 +59,13 @@ public class Aquarium extends GFX {
 		g.setColor(Color.blue);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
-		//Draw nemo and dory
-		nemo.draw(g);
-		dory.draw(g);
+		//Draw fish
+		for (Fish fish : fishList) {
+			fish.draw(g);
+		}
+		
+		//Draw Shark
+		this.jaws.draw(g);
 		
 		this.bubbleSystem.drawChest(g);
 		this.bubbleSystem.bubbleSpawn();
