@@ -50,6 +50,7 @@ public class Shark extends Fish {
 				//if no more fish, swim away
 				this.targetX = 1000;
 				this.targetY = 250;
+				System.out.println("THE END");
 			}
 			
 		
